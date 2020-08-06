@@ -1,0 +1,25 @@
+<div class="container">
+  <h1><%= @restaurant.name %> - <%= @restaurant.category %></h1>
+  <h3><%= @restaurant.address %></h3>
+  <p><%= @restaurant.phone_number %></p>
+
+        <% rating = 0 %>
+        <% @restaurant.reviews.each do |review| %>
+        <% rating += review.rating %>
+        <% end %>
+
+  <h3>Ratings / average: <%= rating / @restaurant.reviews.count %> </h3>
+
+  <% @restaurant.reviews.each do |review| %>
+    <ul>
+      <li>
+        <div class="d-flex justify-content-start">
+          <h4><%= review.rating %> - </h4>
+          <p><%= review.content %></p>
+        </div>
+      </li>
+    </ul>
+  <% end %>
+</div>
+
+
