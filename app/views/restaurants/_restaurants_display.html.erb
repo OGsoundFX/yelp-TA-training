@@ -1,0 +1,14 @@
+<% @restaurants.each do |restaurant| %>
+<ul>
+  <li>
+    <h3><%= link_to restaurant.name, restaurant_path(restaurant) %></h3>
+    <p><%= restaurant.address %></p>
+    <h6><%= restaurant.category %></h6>
+      <% rating = 0 %>
+      <% restaurant.reviews.each do |review| %>
+      <% rating += review.rating %>
+      <% end %>
+      <h2><%= rating / restaurant.reviews.count %></h2>
+  </li>
+</ul>
+<% end %>

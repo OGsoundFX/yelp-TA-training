@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   root to: "restaurants#home"
 
   resources :restaurants do
+    collection do
+      get :top
+    end
+      get :category
     resources :reviews, only: [:new, :create]
-    get :top
   end
 end
