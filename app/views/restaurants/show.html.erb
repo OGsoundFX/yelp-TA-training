@@ -2,6 +2,7 @@
   <h1><%= @restaurant.name %> - <%= @restaurant.category %></h1>
   <h3><%= @restaurant.address %></h3>
   <p><%= @restaurant.phone_number %></p>
+  <%= image_tag @restaurant.photo, width: 200 %>
 
         <% rating = 0 %>
         <% @restaurant.reviews.each do |review| %>

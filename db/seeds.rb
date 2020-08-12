@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
 require "faker"
 puts "deleting all restaurants and reviews"
 
@@ -21,7 +22,10 @@ puts "creating new restaurants"
   address = Faker::Address.community
   phone = Faker::PhoneNumber.cell_phone
   category = ["chinese", "italian", "japanese", "french", "belgian"].sample
-  Restaurant.create(name: name, address: address, phone_number: phone, category: category)
+  restaurant = Restaurant.create(name: name, address: address, phone_number: phone, category: category)
+  restaurant.photo.attach(io: URI.open("https://www.ogsoundfx.com/ogcoding/photo_test/image#{rand(1..5)}.jpg"), filename: 'image')
+  # Fetch local image from the images folder:
+  # restaurant.photo.attach(io: File.open(Rails.root.join("app", "assets", "images", "image.jpg")), filename: 'image.jpg')
 end
 
 list_ids = Restaurant.all
@@ -29,7 +33,6 @@ array_of_ids = []
 list_ids.each do |restaurant|
   array_of_ids << restaurant.id
 end
-
 
 100.times do
   Review.create(content: Faker::Restaurant.review, rating: rand(1..5), restaurant_id: array_of_ids.sample)
